@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TakeHomeGlobal - Salary & Take-Home Pay Calculator</title>
+
+  <meta name="description" content="Calculate your salary after tax and estimate your take-home pay with TakeHomeGlobal.">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      color: #667085;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .hero h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #667085;
+    }
+
+    .calculator {
+      max-width: 500px;
+      margin: 20px auto 60px;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      background: #eef4ff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result h3 {
+      margin-top: 0;
+    }
+
+    .amount {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #667085;
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>TakeHomeGlobal</h1>
+  <p>Salary, Tax & Take-Home Pay Calculator</p>
+</header>
+
+<section class="hero">
+  <h2>Know Your Take-Home Pay</h2>
+  <p>Calculate your estimated salary after tax quickly and easily.</p>
+</section>
+
+<section class="calculator">
+
+  <label for="salary">Annual Salary</label>
+
+  <input
+    type="number"
+    id="salary"
+    placeholder="Example: 60000"
+  >
+
+  <label for="country">Country</label>
+
+  <select id="country">
+    <option value="usa">United States</option>
+    <option value="uk">United Kingdom</option>
+    <option value="canada">Canada</option>
+    <option value="australia">Australia</option>
+    <option value="uae">United Arab Emirates</option>
+  </select>
+
+  <button onclick="calculateSalary()">
+    Calculate Take-Home Pay
+  </button>
+
+  <div class="result" id="result">
+
+    <h3>Estimated Take-Home Pay</h3>
+
+    <div class="amount" id="netSalary">$0</div>
+
+    <p id="monthlySalary">$0 / month</p>
+
+    <small>
+      This is a demo calculation. Official tax rules will be added in the next version.
+    </small>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 TakeHomeGlobal — Salary & Tax Calculator
+</footer>
+
+<script>
+
+function calculateSalary() {
+
+  const salary = Number(document.getElementById("salary").value);
+  const country = document.getElementById("country").value;
+
+  if (!salary || salary <= 0) {
+    alert("Please enter your annual salary.");
+    return;
+  }
+
+  let taxRate = 0;
+
+  /*
+    DEMO ONLY.
+    Real country tax calculations will be added
+    after official tax data is verified.
+  */
+
+  if (country === "usa") {
+    taxRate = 0.20;
+  }
+
+  if (country === "uk") {
+    taxRate = 0.20;
+  }
+
+  if (country === "canada") {
+    taxRate = 0.20;
+  }
+
+  if (country === "australia") {
+    taxRate = 0.20;
+  }
+
+  if (country === "uae") {
+    taxRate = 0;
+  }
+
+  const tax = salary * taxRate;
+  const net = salary - tax;
+  const monthly = net / 12;
+
+  document.getElementById("netSalary").innerText =
+    "$" + net.toLocaleString(undefined, {
+      maximumFractionDigits: 0
+    });
+
+  document.getElementById("monthlySalary").innerText =
+    "$" + monthly.toLocaleString(undefined, {
+      maximumFractionDigits: 0
+    }) + " / month";
+
+  document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+  </html>
